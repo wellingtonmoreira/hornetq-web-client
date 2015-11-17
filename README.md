@@ -12,4 +12,3 @@ $mvn package
 
 ## publish war
  * Weblogic | OK
- * Tomcat | OK
