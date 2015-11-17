@@ -1,7 +1,7 @@
-<?xml version="1.0" encoding="UTF-8"?>
+ <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.sciensa</groupId>
+    <groupId>br.com.netshoes</groupId>
     <artifactId>hornetq-web-client</artifactId>
     <packaging>war</packaging>
     <version>1.0</version>
@@ -9,11 +9,15 @@
     <url>http://maven.apache.org</url>
 
     <properties>
+        <servlet-api>3.0.1</servlet-api>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java-version>1.8</java-version>
-        <hornetq>2.3.0.Final</hornetq>
+        <hornetq>2.4.0.Final</hornetq>
         <jnp-client>4.2.2.GA</jnp-client>
         <jboss-logging>3.1.4.GA</jboss-logging>
+        <commons-io>2.4</commons-io>
+        <jms>2.0</jms>
+        <cdi>2.0-EDR1</cdi>
         <!-- Tests -->
     </properties>
 
@@ -22,12 +26,33 @@
         <dependency>
             <groupId>javax.servlet</groupId>
             <artifactId>javax.servlet-api</artifactId>
-            <version>3.0.1</version>
+            <version>${servlet-api}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>javax.enterprise</groupId>
+            <artifactId>cdi-api</artifactId>
+            <version>${cdi}</version>
+        </dependency>
+        <dependency>
+            <groupId>javax.jms</groupId>
+            <artifactId>javax.jms-api</artifactId>
+            <version>${jms}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.jboss.weld.servlet</groupId>
+            <artifactId>weld-servlet</artifactId>
+            <version>2.2.9.Final</version>
+        </dependency>
+
 
         <!-- Dependencias do HornetQ -->
 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io}</version>
+        </dependency>
         <dependency>
             <groupId>org.hornetq</groupId>
             <artifactId>hornetq-core-client</artifactId>

@@ -1,13 +1,16 @@
-package com.sciensa;
+package br.com.wmoreira.jms;
+
+import java.util.Arrays;
+import java.util.List;
 
 public class PayloadRequest {
 
     private final String url;
     private final Integer port;
     private final String queue;
-    private final String payload;
+    private final String[] payload;
 
-    private PayloadRequest(String url, Integer port, String queue, String payload) {
+    private PayloadRequest(String url, Integer port, String queue, String ... payload) {
         this.url = url;
         this.port = port;
         this.queue = queue;
@@ -18,7 +21,7 @@ public class PayloadRequest {
         return new PayloadRequest.Builder();
     }
 
-    public static PayloadRequest.Builder builder(String url, Integer port, String queue, String payload) {
+    public static PayloadRequest.Builder builder(String url, Integer port, String queue, String[] payload) {
         return new PayloadRequest.Builder(url, port, queue, payload);
     }
 
@@ -34,7 +37,7 @@ public class PayloadRequest {
         return queue;
     }
 
-    public String getPayload() {
+    public String[] getPayload() {
         return payload;
     }
 
@@ -43,13 +46,13 @@ public class PayloadRequest {
         private String url;
         private Integer port;
         private String queue;
-        private String payload;
+        private String[] payload;
 
         private Builder() {
 
         }
 
-        private Builder(String url, Integer port, String queue, String payload) {
+        private Builder(String url, Integer port, String queue, String[] payload) {
             this.url = url;
             this.port = port;
             this.queue = queue;
@@ -88,12 +91,17 @@ public class PayloadRequest {
             return this;
         }
 
-        public String getPayload() {
+        public String[] getPayload() {
             return payload;
         }
 
-        public Builder setPayload(String payload) {
-            this.payload = payload.replaceAll("\n", "").replaceAll("\r", "");
+        public Builder setPayload(String ... payloads) {
+            List<String> cleanPayloads = Arrays.asList(payloads);
+            for (int i = 0; i < cleanPayloads.size(); i++) {
+                cleanPayloads.set(i,
+                                  cleanPayloads.get(i).replaceAll("\n", "").replaceAll("\r", ""));
+            }
+            this.payload = cleanPayloads.toArray(new String[0]);
             return this;
         }
     }
